@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+    .rps{
+        border-radius: 50px;
+        border: 10px solid black;
+        width: 200px;
+        height: 200px;
+        margin: 30px;
+        font-size: 200px;
+        text-align: center;
+    }
+
+    #container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #container-l{
+        display: flex;
+        justify-content:  center;
+        align-items: center;
+    }
+
+    .line{
+        border-top: 2px solid black;
+        height: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+
+    #uitslag{
+        text-align: center;
+        font-size: 50px;
+        font-weight: bold;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    #score{
+        display: flex;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 50px;
+        font-weight: bold;
+    }
+
+
+    ul {
+       display: flex;
+       border-radius: 25px;
+       flex-direction: row;
+       justify-content: space-between;
+       list-style-type: none;
+       margin: 0;
+       padding: 0;
+       overflow: hidden;
+       background-color: #0090E3;
+    }
+
+    li {
+      display: inline;
+      list-style: none;
+      float: left;
+      font-size: 25px;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    li a:hover {
+      background-color: darkblue;;
+      border-radius: 10px;
+    }
+    .active {
+      color: orange;
+    }
+    nav{
+      font-family: 'Montserrat', sans-serif;
+    }
+</style>
+</head>
+<body onload="startGame()">
+  <nav id="nav">
+      <ul>
+
+        <li>              <a class="active" href="index.html">Home</a>  </li>
+        <li>              <a href="games.html">Games</a>                </li>
+        <li>              <a href="Contact.html">Contact</a>            </li>
+        <li>              <a href="overons.html">Over ons</a>           </li>
+
+      </ul>
+    </nav>
+     <div id="score">
+        <div>Score: 0</div>
+    </div>
+    <div id="msg">
+            <div id="msgAlert">Status: </div>
+        </div>
+    <div id="timer">
+    <div >30 seconds remaining</div>
+  </div>
+    <div id="container">
+        <div class="rps" id="getal1"></div>
+        <div class="rps" id="operator"></div>
+        <div class="rps" id="getal2"></div>
+        <div class="rps">=</div>
+        <div class="rps" id="antwoord"></div>
+    </div>
+
+
+
+
+    <div id="container" class="containerIMG">
+        <img class="rps" src="img/+.png" onclick="operations('+')"></img>
+        <img class="rps" src="img/-.png" onclick="operations('-')"></img><br>
+        <img class="rps" src="img/x.png" onclick="operations('*')"></img>
+        <img class="rps" src="img/backslash.png" onclick="operations('/')"></img>
+    </div>
+
+
+
+    <script>
+    var score = 0;
+        var operator = "";
+      function operations(userOperator) {
+        if (userOperator === operator ) {
+          showMsg("Heel goed gedaan!");
+          score++;
+          //location.reload();
+          startGame();
+        }
+        else{
+          showMsg("Volgende keer beter!");
+          //location.reload();
+          startGame();
+        }
+      }
+
+      function startGame() {
+
+
+      var getal1 = Math.random() * 9 + 1;
+      getal1 = getal1.toFixed(0); // Random getal voor operations
+
+      var getal2 = Math.random() * 9 + 1;
+      getal2 = getal2.toFixed(0); // Random getal voor operations
+
+      var operation = Math.random() * 10;
+      operation = operation.toFixed(0);
+
+
+// +
+      if (operation == 0 || operation == 1 || operation == 2){
+        // document.write("+");
+         operator =  "+";
+         x = parseInt(getal1) + parseInt(getal2);
+        var antwoord = String(x);
+        console.log(antwoord);
+      }
+// -
+      else if (operation == 3 || operation == 4 || operation == 5){
+        // document.write("-");
+         operator = '-';
+        var antwoord = getal1  -  getal2;
+      }
+
+      else if (operation == 6 || operation == 7 || operation == 8){
+        // document.write("*");
+         operator = '*';
+        var antwoord = getal1  *  getal2;
+      }
+
+      else if ((operation == 9 || operation == 10) && getal2 != 0){
+        // document.write("/");
+         operator = '/';
+        var antwoord = getal1  /  getal2;
+      }
+      //document.write(getal1 + " " + " ? " + " " +getal2 + " = " + antwoord);
+      document.getElementById("getal1").innerHTML = getal1;
+      document.getElementById("operator").innerHTML = "?";
+      document.getElementById("getal2").innerHTML = getal2;
+      document.getElementById("antwoord").innerHTML = antwoord;
+      document.getElementById('score').innerHTML = "Score: " + score;
+
+      }
+
+      function showMsg(m){
+        document.getElementById('msg').innerHTML = m ;
+      }
+
+
+      var timeLeft = 30;
+      var elem = document.getElementById('some_div');
+      var timerId = setInterval(countdown, 1000);
+
+          function countdown() {
+              if (timeLeft == -1) {
+                  clearTimeout(timerId);
+                  timerDone();
+              } else {
+                  document.getElementById('timer').innerHTML = timeLeft + ' seconds remaining';
+                  timeLeft--;
+              }
+          }
+
+function timerDone() {
+    alert("Game is done, You got " + score + " points! Well done");
+    // document.getElementById('container').innerHTML = " ";
+    // document.getElementsByClassName('container').innerHTML = " ";
+    window.location = "index.html"
+
+}
+// window.onload = function() {
+//    var points = score;
+//    var game = "Rock, Paper, Scissors";
+//    localStorage.setItem("score", points);
+//    localStorage.setItem("game", game);
+//
+// }
+
+
+    </script>
+
+
+    <!-- <div id="container" id="containerIMG">
+        <img class="rps" src="img/+.png" onclick="operations('x')"></img>
+        <img class="rps" src="img/-.png" onclick="operations('-')"></img><br>
+        <img class="rps" src="img/x.png" onclick="operations('*')"></img>
+        <img class="rps" src="img/backslash.png" onclick="operations('/')"></img>
+    </div> -->
+    <br>
+</body>
+</html>

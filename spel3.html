@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <style>
+
+    html{
+      font-family: 'Montserrat', sans-serif;
+    }
+    #container{
+        overflow: hidden;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center; /*centers items on the line (the x-axis by default)*/
+        align-items: center; /*centers items on the cross-axis (y by default)*/
+      }
+
+      #box{
+        background-color: lightblue;
+        border: 5px solid black;
+        border-radius: 25px;
+        width: 200px;
+        height: 200px;
+        /* display: flex; */
+        /* justify-content: space-around; */
+        /* flex-direction: column; */
+        overflow: hidden;
+        position: absolute;
+        /* width: 100%; */
+        /* height: 100%; */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;; /*centers items on the line (the x-axis by default)*/
+        align-items: center; /*centers items on the cross-axis (y by default)*/
+        /* left: 50px; */
+
+      }
+
+      #top{
+        /* transform: rotate(270deg); */
+        display: flex;
+        left: 100px;
+        /* top: 50px; */
+        font-size: 45px;
+        font-weight: bold;
+      }
+      #down{
+        /* transform: rotate(270deg); */
+        /* display: flex; */
+        left: 100px;
+        top: 50px;
+        font-size: 45px;
+        font-weight: bold;
+      }
+
+      #number{
+
+        font-size: 70px;
+        font-weight: bold;
+      }
+
+
+    </style>
+  </head>
+  <body>
+
+      <button id="startButton" onclick="start()">Start!</button>
+
+    <div id="output">
+
+    </div>
+
+    <div id="test">
+      Score: 0
+    </div>
+
+    <div id="container">
+
+        <div id="box">
+
+            <!-- <div id="top">></div>
+            <div id="bottom">></div> -->
+
+            <div id="top" onclick="startGame('higher')"><i class="fas fa-angle-up"></i></div>
+            <div id="number">Press Start!</div>
+            <div id="down" onclick="startGame('lower')"><i class="fas fa-angle-down"></i></div>
+
+
+          </div>
+
+      </div>
+
+
+
+
+    <script>
+
+    // var click;
+    var score=0;
+    var getal = Math.floor(Math.random() * 99) + 1;
+
+
+
+    function start(click){
+
+      // getal=50;
+      document.getElementById('number').innerHTML = getal;
+      startGame(click);
+        document.getElementById('startButton').innerHTML = " ";
+
+    }
+    function startGame(click){
+
+      getal = document.getElementById('number').innerHTML;
+      var random = Math.floor(Math.random() * 99) + 1;
+      // random = random.toFixed(0);
+
+      if(click == "higher"){
+        // document.getElementById('output').innerHTML = click;
+        var lastnumber = getal;
+        // var newnumber = random;
+
+        document.getElementById('number').innerHTML = random;
+        var newnumber = document.getElementById('number').innerHTML;
+        console.log("new: " + newnumber);
+        console.log("old: " + lastnumber);
+        console.log("--------------------");
+
+
+        // document.getElementById('output').innerHTML = lastnumber + " + " + newnumber;
+        // document.getElementById('number').innerHTML = random;
+
+        check(lastnumber, newnumber, click);
+
+      }
+      else if(click == "lower"){
+        // document.getElementById('output').innerHTML = click;
+        var lastnumber = getal;
+
+        document.getElementById('number').innerHTML = random;
+
+        var newnumber = document.getElementById('number').innerHTML;
+        console.log("new: " + newnumber);
+        console.log("old: " + lastnumber);
+        console.log("--------------------");
+        // document.getElementById('output').innerHTML = lastnumber + " + " + newnumber;
+        // document.getElementById('number').innerHTML = random;
+
+        check(lastnumber, newnumber, click);
+
+      }
+      // document.getElementById('output').innerHTML = lastnumber;
+    }
+
+    function check(lastnumber, newnumber, click){
+
+      if(click=="higher"){
+              if(lastnumber < newnumber){
+                win('true');
+                // console.log("hier1");
+              }
+              else if (lastnumber > newnumber){
+                win('false');
+              }
+          }
+      else if (click=='lower'){
+              if(lastnumber > newnumber){
+                win('true');
+              }
+              else if (lastnumber < newnumber){
+
+                win('false');
+              }
+
+
+      }
+
+    }
+
+    function win(win){
+      if(win == "true"){
+        score++
+        document.getElementById('test').innerHTML = "Score: " + score;
+
+      }
+
+      else if(win == "false"){
+      document.getElementById('test').innerHTML = "Score: " + score;
+    }
+
+    }
+
+    </script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+    .rps{
+        border-radius: 50px;
+        border: 10px solid black;
+        width: 200px;
+        height: 200px;
+        margin: 30px;
+        font-size: 200px;
+        text-align: center;
+    }
+
+    #container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #container-l{
+        display: flex;
+        justify-content:  center;
+        align-items: center;
+    }
+
+    .line{
+        border-top: 2px solid black;
+        height: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+
+    #uitslag{
+        text-align: center;
+        font-size: 50px;
+        font-weight: bold;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    #score{
+        display: flex;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 50px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body onload="startGame()"> 
+     <div id="score">
+        <div>Score: 0</div>
+    </div>
+    <div id="msg">
+            <div id="msgAlert">Status: </div>
+        </div>
+    <div id="timer">
+    <div >30 seconds remaining</div>
+  </div>
+    <div id="container">
+        <div class="rps" id="getal1"></div>
+        <div class="rps" id="operator"></div>
+        <div class="rps" id="getal2"></div>
+        <div class="rps">=</div>
+        <div class="rps" id="antwoord"></div>
+    </div>
+    <script>
+        var operator = "";
+      function operations(userOperator) {
+        if (userOperator === operator ) {
+          showMsg("Heel goed gedaan!");
+          //location.reload();
+          startGame();
+        }
+        else{
+          showMsg("Volgende keer beter!");
+          //location.reload();
+          startGame();
+        }
+      }
+
+      function startGame() {
+          
+      
+      var getal1 = Math.random() * 10;
+      getal1 = getal1.toFixed(0);
+
+      var getal2 = Math.random() * 10;
+      getal2 = getal2.toFixed(0);
+
+      var operation = Math.random() * 10;
+      operation = operation.toFixed(0);
+
+
+// +
+      if (operation == 0 || operation == 1 || operation == 2){
+        // document.write("+");
+         operator =  "+";
+        var antwoord = (getal1 / 1 +  getal2 / 1 );
+      }
+// -
+      else if (operation == 3 || operation == 4 || operation == 5){
+        // document.write("-");
+         operator = '-';
+        var antwoord = getal1  -  getal2;
+      }
+
+      else if (operation == 6 || operation == 7 || operation == 8){
+        // document.write("*");
+         operator = '*';
+        var antwoord = getal1  *  getal2;
+      }
+
+      else if ((operation == 9 || operation == 10) && getal2 != 0){
+        // document.write("/");
+         operator = '/';
+        var antwoord = getal1  /  getal2;
+      }
+      else{
+        operator =  "+";
+        var antwoord = (getal1 / 1 +  getal2 / 1 );
+      }
+      //document.write(getal1 + " " + " ? " + " " +getal2 + " = " + antwoord);
+      document.getElementById("getal1").innerHTML = getal1;
+      document.getElementById("operator").innerHTML = "?";
+      document.getElementById("getal2").innerHTML = getal2;
+      document.getElementById("antwoord").innerHTML = antwoord;
+
+      }
+
+      function showMsg(m){
+        document.getElementById('msg').innerHTML = m ;
+      }
+
+
+    </script>
+    
+
+    <div id="container">
+        <img class="rps" src="img/+.png" onclick="operations('x')"></img>
+        <img class="rps" src="img/-.png" onclick="operations('-')"></img><br>
+        <img class="rps" src="img/x.png" onclick="operations('*')"></img>
+        <img class="rps" src="img/backslash.png" onclick="operations('/')"></img>
+    </div>
+    <br>
+</body>
+</html>

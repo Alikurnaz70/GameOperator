@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Rock Paper Scissors</title>
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <style>
+
+      .rps{
+        border-radius: 50px;
+        border: 10px solid black;
+        width: 200px;
+        height: 200px;
+        margin: 30px;
+
+      }
+
+      #container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #container-l{
+        display: flex;
+        justify-content:  center;
+        align-items: center;
+      }
+
+      .line{
+        border-top: 2px solid black;
+        height: 10px;
+        width: 100%;
+        text-align: center;
+      }
+
+
+      #uitslag{
+        text-align: center;
+        font-size: 50px;
+        font-weight: bold;
+        font-family: 'Montserrat', sans-serif;
+      }
+
+      #score{
+        display: flex;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 50px;
+        font-weight: bold;
+      }
+
+      ul {
+         display: flex;
+         border-radius: 25px;
+         flex-direction: row;
+         justify-content: space-between;
+         list-style-type: none;
+         margin: 0;
+         padding: 0;
+         overflow: hidden;
+         background-color: #0090E3;
+      }
+
+      li {
+        display: inline;
+        list-style: none;
+        float: left;
+        font-size: 25px;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+
+      li a:hover {
+        background-color: darkblue;;
+        border-radius: 10px;
+      }
+      .active {
+        color: orange;
+      }
+      nav{
+        font-family: 'Montserrat', sans-serif;
+      }
+
+    </style>
+  </head>
+  <body>
+    <nav id="nav">
+        <ul>
+
+          <li>              <a class="active" href="index.html">Home</a>  </li>
+          <li>              <a href="games.html">Games</a>                </li>
+          <li>              <a href="Contact.html">Contact</a>            </li>
+          <li>              <a href="overons.html">Over ons</a>           </li>
+
+        </ul>
+      </nav>
+<div id="score">
+    <div >Score: 0</div>
+  </div>
+
+  <div id="timer">
+      <div >30 seconds remaining</div>
+    </div>
+    <div id="container">
+    <img class="rps" id="rock" src="img/rock.png" onclick="game('rock')"></img>
+    <img class="rps" id="paper" src="img/paper.png" onclick="game('paper')"></img>
+    <img class="rps" id="scissors" src="img/scissors.png" onclick="game('scissors')"></img>
+
+  </div>
+
+  <div class="line">
+
+  </div>
+
+  <div id="uitslag">
+<br />
+  </div>
+
+  <div class="line">
+
+  </div>
+
+  <div id="container-l">
+    <img class="rps" id="rock-ai" src="img/rock.png"></img>
+    <img class="rps" id="paper-ai" src="img/paper.png"></img>
+    <img class="rps" id="scissors-ai" src="img/scissors.png"></img>
+  </div>
+
+
+    <div id="output">
+
+    </div>
+
+    <script>
+      var score = 0;
+      function game(type){
+        // document.getElementById('output').innerHTML = type;
+
+
+        var keuze = type;
+        var score=0;
+
+
+          var random = Math.random() * 10;
+          random = random.toFixed(0);
+          // document.getElementById('output').innerHTML = random;
+
+// RANDOMIZER
+// Rock
+          if(random == 0 || random == 2 || random == 4 || random == 6){
+              var ai = 'rock';
+
+              document.getElementById('rock-ai').style.border = "10px solid orange";
+              document.getElementById('paper-ai').style.border = "10px solid black";
+              document.getElementById('scissors-ai').style.border = "10px solid black";
+
+          }
+
+// Paper
+          else if(random == 1 || random == 5 || random == 8 || random == 10){
+            var ai = 'paper';
+
+
+            document.getElementById('rock-ai').style.border = "10px solid black";
+            document.getElementById('paper-ai').style.border = "10px solid orange";
+            document.getElementById('scissors-ai').style.border = "10px solid black";
+          }
+// Scissors
+          else if(random == 3 || random == 7 || random == 9){
+            var ai = 'scissors';
+
+            document.getElementById('rock-ai').style.border = "10px solid black";
+            document.getElementById('paper-ai').style.border = "10px solid black";
+            document.getElementById('scissors-ai').style.border = "10px solid orange";
+
+          }
+
+
+            if (keuze == 'rock'){
+              document.getElementById('rock').style.border = "10px solid orange";
+              document.getElementById('paper').style.border = "10px solid black";
+              document.getElementById('scissors').style.border = "10px solid black";
+
+              if(ai=='rock'){
+                var winlose = "I'ts a draw";
+                var status = 'draw';
+                score;
+              }
+              if(ai=='paper'){
+                var status = 'lose';
+                var winlose = 'You Lose';
+                lose();
+              }
+              if(ai=='scissors'){
+                var status = 'win';
+                var winlose = 'You Win';
+                win();
+              }
+            }
+
+            if (keuze == 'paper'){
+              document.getElementById('rock').style.border = "10px solid black";
+              document.getElementById('paper').style.border = "10px solid orange";
+              document.getElementById('scissors').style.border = "10px solid black";
+
+              if(ai=='rock'){
+                var status = 'win';
+                var winlose = 'You Win';
+                win();
+              }
+              if(ai=='paper'){
+                var status = 'draw';
+                var winlose = "I'ts a draw";
+                score;
+              }
+              if(ai=='scissors'){
+                var status = 'lose';
+                var winlose = 'You Lose';
+                lose()
+              }
+            }
+
+            if (keuze == 'scissors'){
+              document.getElementById('rock').style.border = "10px solid black";
+              document.getElementById('paper').style.border = "10px solid black";
+              document.getElementById('scissors').style.border = "10px solid orange";
+              if(ai=='rock'){
+                var status = 'lose';
+                var winlose = 'You Lose';
+                lose()
+              }
+              if(ai=='paper'){
+                var status = 'win';
+                var winlose = 'You Win';
+                win();
+              }
+              if(ai=='scissors'){
+                var winlose = "I'ts a draw";
+                var status = 'draw';
+                score;
+              }
+            }
+//             for(i = 0; i <= 50; i++) {
+//                   document.getElementById('score').innerHTML = 'Score: ' + score;
+//             }
+// var score;
+
+            // document.getElementById('output').innerHTML = "Your chose " + keuze + "<br />" + "The other team chose " + ai + "<br />" + winlose;
+            // console.log(status);
+
+            document.getElementById('uitslag').innerHTML = winlose;
+
+
+
+      }
+
+      var timeLeft = 30;
+      var elem = document.getElementById('timer');
+      var timerId = setInterval(countdown, 1000);
+
+      function countdown() {
+          if (timeLeft == -1) {
+              clearTimeout(timerId);
+              timerDone();
+          } else {
+              elem.innerHTML = timeLeft + ' seconds remaining';
+              timeLeft--;
+          }
+      }
+
+      function timerDone() {
+          // document.getElementById('uitslag').innerHTML = "You got " + score + " points!" + "<button id='return' onclick='main()'>Return to main menu</button>";
+          // document.getElementById('uitslag').innerHTML = "You got " + score + " points!";
+          alert("Game is done, You got " + score + " points! Well done");
+          // document.getElementById('container').innerHTML = " ";
+          // document.getElementsByClassName('container').innerHTML = " ";
+          window.location = "index.html"
+
+
+      }
+
+      function main(){
+          location.href = 'index.html';
+      }
+
+      function win(){
+        score++;
+        document.getElementById('score').innerHTML = 'Score: ' + score;
+      }
+      function lose(){
+        var lose;
+        lose++;
+        // document.getElementById('score').innerHTML = 'Score: ' + score;
+
+      }
+
+    </script>
+
+  </body>
+</html>
